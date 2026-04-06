@@ -29,13 +29,26 @@ class FourthActivity : AppCompatActivity() {
         }
 
         binding.btnToMain.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
 
         val nama = intent.getStringExtra("nama")
         val asal = intent.getStringExtra("asal")
         val umur = intent.getIntExtra("umur",0)
         Log.i("== Data Intent ==","Nama: $nama , Usia: $umur, Asal: $asal")
+
+        Log.e("== onCreate ==", "FourthActivity dibuat pertama kali")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("== onStart ==", "onStart: FourthActivity terlihat di layar")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("== onDestroy ==", "FourthActivity dihapus dari stack")
     }
 }
