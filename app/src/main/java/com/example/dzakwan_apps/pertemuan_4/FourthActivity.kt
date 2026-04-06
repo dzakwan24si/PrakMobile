@@ -13,6 +13,8 @@ import com.example.dzakwan_apps.R
 import com.example.dzakwan_apps.databinding.ActivityFourthBinding
 import com.example.dzakwan_apps.databinding.ActivityThirdBinding
 import com.example.dzakwan_apps.pertemuan_3.ThirdResultActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class FourthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFourthBinding
@@ -32,6 +34,28 @@ class FourthActivity : AppCompatActivity() {
             finish()
 //            val intent = Intent(this, MainActivity::class.java)
 //            startActivity(intent)
+        }
+        binding.btnShowSnackbar.setOnClickListener {
+            Snackbar.make(binding.root, "Ini adalah Snackbar", Snackbar.LENGTH_SHORT)
+                .setAction("Tutup"){
+                    Log.e("Info Snackbar","Snackbar ditutup")
+                }
+                .show()
+        }
+
+        binding.btnShowAlertDialog.setOnClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Konfirmasi")
+                .setMessage("Apakah Anda yakin ingin melanjutkan?")
+                .setPositiveButton("Ya") { dialog, _ ->
+                    dialog.dismiss()
+                    Log.e("Info Dialog","Anda memilih Ya!")
+                }
+                .setNegativeButton("Batal") { dialog, _ ->
+                    dialog.dismiss()
+                    Log.e("Info Dialog","Anda memilih Tidak!")
+                }
+                .show()
         }
 
         val nama = intent.getStringExtra("nama")
