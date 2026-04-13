@@ -35,6 +35,20 @@ class FifthActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
+        // Logika Improvisasi 3: Menyembunyikan FAB saat di atas, muncul saat scroll
+        binding.nestedScrollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            if (scrollY > 500) { // Jika di-scroll ke bawah
+                binding.fabUp.show()
+            } else {
+                binding.fabUp.hide()
+            }
+        }
+
+        // Logika FAB diklik (Scroll ke paling atas perlahan)
+        binding.fabUp.setOnClickListener {
+            binding.nestedScrollView.smoothScrollTo(0, 0)
+        }
+
         // Pindah ke WebViewActivity saat tombol diklik
         binding.btnWebView.setOnClickListener {
             val intent = Intent(this, WebViewActivity::class.java)

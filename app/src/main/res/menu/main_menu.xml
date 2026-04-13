@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_search"
         android:title="Search"
         android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_settings"
         android:title="Settings"
         android:icon="@android:drawable/ic_menu_preferences"
         app:showAsAction="never" />
+
+    <item
+        android:title="Pilih Tema"
+        android:icon="@android:drawable/ic_menu_preferences"
+        app:showAsAction="never">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/theme_light" android:title="Tema Terang" />
+                <item android:id="@+id/theme_dark" android:title="Tema Gelap" />
+            </group>
+        </menu>
+    </item>
 </menu>

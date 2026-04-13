@@ -39,6 +39,19 @@ class WebViewActivity : AppCompatActivity() {
                 binding.appBar.setExpanded(true, true) // tampilkan
             }
         }
+
+        // Logika Improvisasi 4: Swipe to Refresh
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.webView.reload() // Muat ulang halaman web
+        }
+
+        // Memberitahu SwipeRefresh kalau web sudah selesai dimuat agar ikon loading hilang
+        binding.webView.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: android.webkit.WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                binding.swipeRefresh.isRefreshing = false // Matikan animasi loading
+            }
+        }
     }
 
     // Mengambil alih tombol navigasi kembali pada HP / Toolbar
