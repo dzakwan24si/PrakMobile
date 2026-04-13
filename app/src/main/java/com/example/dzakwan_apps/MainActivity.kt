@@ -10,8 +10,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.dzakwan_apps.databinding.ActivityFourthBinding
 import com.example.dzakwan_apps.databinding.ActivityMainBinding
 import com.example.dzakwan_apps.databinding.ActivityThirdBinding
+import com.example.dzakwan_apps.pertemuan_3.ThirdActivity
 import com.example.dzakwan_apps.pertemuan_3.ThirdResultActivity
 import com.example.dzakwan_apps.pertemuan_4.FourthActivity
+import com.example.dzakwan_apps.pertemuan_5.FifthActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,11 +28,21 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        binding.btnToThird.setOnClickListener {
+            val intent = Intent(this, ThirdActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnToFourth.setOnClickListener {
             val intent = Intent(this, FourthActivity::class.java)
             intent.putExtra("nama", "Politeknik Caltex Riau")
             intent.putExtra("asal", "Rumbai")
             intent.putExtra("umur", 25)
+            startActivity(intent)
+        }
+
+        binding.btnToFifth.setOnClickListener {
+            val intent = Intent(this, FifthActivity::class.java)
             startActivity(intent)
         }
     }

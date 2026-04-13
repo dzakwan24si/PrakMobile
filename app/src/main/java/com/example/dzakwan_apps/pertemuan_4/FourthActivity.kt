@@ -3,6 +3,7 @@ package com.example.dzakwan_apps.pertemuan_4
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,14 @@ class FourthActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+            title = "Activity Fourth"
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
 
         binding.btnToMain.setOnClickListener {
@@ -64,6 +73,16 @@ class FourthActivity : AppCompatActivity() {
         Log.i("== Data Intent ==","Nama: $nama , Usia: $umur, Asal: $asal")
 
         Log.e("== onCreate ==", "FourthActivity dibuat pertama kali")
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onStart() {
