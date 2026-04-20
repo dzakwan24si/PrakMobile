@@ -2,6 +2,7 @@ package com.example.dzakwan_apps
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.example.dzakwan_apps.pertemuan_3.ThirdActivity
 import com.example.dzakwan_apps.pertemuan_3.ThirdResultActivity
 import com.example.dzakwan_apps.pertemuan_4.FourthActivity
 import com.example.dzakwan_apps.pertemuan_5.FifthActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -44,6 +46,23 @@ class MainActivity : AppCompatActivity() {
         binding.btnToFifth.setOnClickListener {
             val intent = Intent(this, FifthActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnLogout.setOnClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Konfirmasi")
+                .setMessage("Apakah Anda yakin ingin melanjutkan?")
+                .setPositiveButton("Ya") { dialog, _ ->
+                    dialog.dismiss()
+                    val intent = Intent(this, AuthActivity::class.java)
+                    startActivity(intent)
+                    Log.e("Info Dialog","Anda memilih Ya!")
+                }
+                .setNegativeButton("Batal") { dialog, _ ->
+                    dialog.dismiss()
+                    Log.e("Info Dialog","Anda memilih Tidak!")
+                }
+                .show()
         }
     }
 }
