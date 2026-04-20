@@ -13,6 +13,7 @@ import com.example.dzakwan_apps.databinding.ActivityMainBinding
 import com.example.dzakwan_apps.pertemuan_3.ThirdActivity
 import com.example.dzakwan_apps.pertemuan_3.ThirdResultActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import androidx.core.content.edit
 
 class AuthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthBinding
@@ -27,10 +28,25 @@ class AuthActivity : AppCompatActivity() {
             insets
         }
 
+        //Kode ini harus selalu dipanggil saat butuh akses "user_pref"
+        val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
+
+//        //Kondisi jika isLogin bernilai true
+//        val isLogin = sharedPref.getBoolean("isLogin", false)
+//        if (isLogin) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish() // Kill AuthActivity
+//        }
+
         binding.btnLogin.setOnClickListener {
             val username = binding.inputusername.text.toString()
             val password = binding.inputpassword.text.toString()
             if (username == password) {
+                sharedPref.edit {
+                    putBoolean("isLogin", true)
+                    putString("username", username)
+                }
                 Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
