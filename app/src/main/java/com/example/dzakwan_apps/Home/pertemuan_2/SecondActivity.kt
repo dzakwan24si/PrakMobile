@@ -1,4 +1,4 @@
-package com.example.dzakwan_apps.pertemuan_2
+package com.example.dzakwan_apps.Home.pertemuan_2
 
 import android.os.Bundle
 import android.util.Log

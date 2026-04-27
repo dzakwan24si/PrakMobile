@@ -2,16 +2,12 @@ package com.example.dzakwan_apps
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.dzakwan_apps.databinding.ActivityAuthBinding
-import com.example.dzakwan_apps.databinding.ActivityMainBinding
-import com.example.dzakwan_apps.pertemuan_3.ThirdActivity
-import com.example.dzakwan_apps.pertemuan_3.ThirdResultActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.core.content.edit
 
@@ -48,7 +44,7 @@ class AuthActivity : AppCompatActivity() {
                     putString("username", username)
                 }
                 Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, BaseActivity::class.java)
                 startActivity(intent)
                 finish()
 

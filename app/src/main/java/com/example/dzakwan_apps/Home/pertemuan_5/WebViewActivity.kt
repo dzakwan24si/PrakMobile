@@ -1,6 +1,7 @@
-package com.example.dzakwan_apps.pertemuan_5
+package com.example.dzakwan_apps.Home.pertemuan_5
 
 import android.os.Bundle
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -47,7 +48,7 @@ class WebViewActivity : AppCompatActivity() {
 
         // Memberitahu SwipeRefresh kalau web sudah selesai dimuat agar ikon loading hilang
         binding.webView.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: android.webkit.WebView?, url: String?) {
+            override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 binding.swipeRefresh.isRefreshing = false // Matikan animasi loading
             }

@@ -1,42 +1,51 @@
-package com.example.dzakwan_apps
+package com.example.dzakwan_apps.Home
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.dzakwan_apps.databinding.ActivityMainBinding
+import com.example.dzakwan_apps.AuthActivity
 import com.example.dzakwan_apps.Home.pertemuan_3.ThirdActivity
 import com.example.dzakwan_apps.Home.pertemuan_4.FourthActivity
 import com.example.dzakwan_apps.Home.pertemuan_5.FifthActivity
 import com.example.dzakwan_apps.Home.pertemuan_7.SevenActivity
+import com.example.dzakwan_apps.R
+import com.example.dzakwan_apps.databinding.FragmentHomeBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+class HomeFragment : Fragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val sharedPref = requireContext().getSharedPreferences("user_pref", MODE_PRIVATE)
+
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            title = "Home"
         }
 
-        val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
-
         binding.btnToThird.setOnClickListener {
-            val intent = Intent(this, ThirdActivity::class.java)
+            val intent = Intent(requireContext(), ThirdActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnToFourth.setOnClickListener {
-            val intent = Intent(this, FourthActivity::class.java)
+            val intent = Intent(requireContext(), FourthActivity::class.java)
             intent.putExtra("nama", "Politeknik Caltex Riau")
             intent.putExtra("asal", "Rumbai")
             intent.putExtra("umur", 25)
@@ -44,17 +53,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnToFifth.setOnClickListener {
-            val intent = Intent(this, FifthActivity::class.java)
+            val intent = Intent(requireContext(), FifthActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnToSeven.setOnClickListener {
-            val intent = Intent(this, SevenActivity::class.java)
+            val intent = Intent(requireContext(), SevenActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnLogout.setOnClickListener {
-            MaterialAlertDialogBuilder(this)
+            MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Konfirmasi")
                 .setMessage("Apakah Anda yakin ingin melanjutkan?")
                 .setPositiveButton("Ya") { dialog, _ ->
@@ -62,9 +71,9 @@ class MainActivity : AppCompatActivity() {
                     sharedPref.edit {
                         clear()
                     }
-                    val intent = Intent(this, AuthActivity::class.java)
+                    val intent = Intent(requireContext(), AuthActivity::class.java)
                     startActivity(intent)
-                    finish()
+                    requireActivity().finish()
                 }
                 .setNegativeButton("Batal") { dialog, _ ->
                     dialog.dismiss()

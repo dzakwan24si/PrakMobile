@@ -1,4 +1,4 @@
-package com.example.dzakwan_apps.pertemuan_7
+package com.example.dzakwan_apps.Home.pertemuan_7
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,9 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.dzakwan_apps.R
-import com.example.dzakwan_apps.databinding.ActivityFifthBinding
 import com.example.dzakwan_apps.databinding.ActivitySevenBinding
-import kotlin.text.replace
 
 class SevenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySevenBinding

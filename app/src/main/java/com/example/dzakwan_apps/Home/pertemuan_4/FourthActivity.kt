@@ -1,19 +1,14 @@
-package com.example.dzakwan_apps.pertemuan_4
+package com.example.dzakwan_apps.Home.pertemuan_4
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.dzakwan_apps.MainActivity
 import com.example.dzakwan_apps.R
 import com.example.dzakwan_apps.databinding.ActivityFourthBinding
-import com.example.dzakwan_apps.databinding.ActivityThirdBinding
-import com.example.dzakwan_apps.pertemuan_3.ThirdResultActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
