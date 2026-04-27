@@ -16,6 +16,7 @@ import com.example.dzakwan_apps.pertemuan_3.ThirdActivity
 import com.example.dzakwan_apps.pertemuan_3.ThirdResultActivity
 import com.example.dzakwan_apps.pertemuan_4.FourthActivity
 import com.example.dzakwan_apps.pertemuan_5.FifthActivity
+import com.example.dzakwan_apps.pertemuan_7.SevenActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -48,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnToFifth.setOnClickListener {
             val intent = Intent(this, FifthActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnToSeven.setOnClickListener {
+            val intent = Intent(this, SevenActivity::class.java)
             startActivity(intent)
         }
 
