@@ -2,6 +2,7 @@ package com.example.dzakwan_apps
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -45,11 +46,22 @@ class BaseActivity : AppCompatActivity() {
                 else ->false
             }
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager.backStackEntryCount > 1) {
+                    supportFragmentManager.popBackStack()
+                } else {
+                    finish()
+                }
+            }
+        })
     }
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)
-            //.addToBackStack(null) -> ini kita nonaktifkan agar saat back langsung keluar aplikasi
+            .addToBackStack(null)
             .commit()
     }
+
+
 }

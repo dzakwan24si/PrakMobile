@@ -24,6 +24,19 @@ class MessageFragment : Fragment() {
     private var _binding: FragmentMessageBinding? = null
     private val binding get() = _binding!!
 
+    private val messageList = listOf(
+        MessageModel("Alya", "Halo! Apa kabar?", "https://i.pravatar.cc/150?img=5"),
+        MessageModel("Budi", "Sudah makan?", "https://i.pravatar.cc/150?img=51"),
+        MessageModel("Citra", "Jangan lupa tugasnya ya!", "https://i.pravatar.cc/150?img=9"),
+        MessageModel("Dika", "Besok kita rapat jam 9", "https://i.pravatar.cc/150?img=3"),
+        MessageModel("Eka", "Nice job kemarin!", "https://i.pravatar.cc/150?img=7"),
+        MessageModel("Fajar", "Lagi ngapain?", "https://i.pravatar.cc/150?img=8"),
+        MessageModel("Gita", "Boleh minta tolong?", "https://i.pravatar.cc/150?img=10"),
+        MessageModel("Hana", "Lihat email ya", "https://i.pravatar.cc/150?img=16"),
+        MessageModel("Irfan", "Oke noted", "https://i.pravatar.cc/150?img=12"),
+        MessageModel("Joko", "Sampai jumpa besok", "https://i.pravatar.cc/150?img=6")
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,5 +51,8 @@ class MessageFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             title = "Message"
         }
+
+        val adapter = MessageAdapter(requireContext(), messageList)
+        binding.listMessageItems.adapter = adapter
     }
 }
