@@ -60,6 +60,11 @@ class TenthActivity : AppCompatActivity() {
                     badge.isVisible = true
                     badge.number = 5
                 }
+                2 -> {
+                    tab.text = "Produk"
+                    //Tambah Icon
+                    tab.icon = ContextCompat.getDrawable(  this, R.drawable.ic_eyeglasses)
+                }
             }
         }.attach()
     }
