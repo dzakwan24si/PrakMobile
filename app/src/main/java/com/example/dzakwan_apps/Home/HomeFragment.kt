@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.example.dzakwan_apps.AuthActivity
+import com.example.dzakwan_apps.Home.pertemuan_10.TenthActivity
 import com.example.dzakwan_apps.Home.pertemuan_3.ThirdActivity
 import com.example.dzakwan_apps.Home.pertemuan_4.FourthActivity
 import com.example.dzakwan_apps.Home.pertemuan_5.FifthActivity
@@ -65,6 +66,11 @@ class HomeFragment : Fragment() {
 
         binding.btnToNine.setOnClickListener {
             val intent = Intent(requireContext(), NinthActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnToTen.setOnClickListener {
+            val intent = Intent(requireContext(), TenthActivity::class.java)
             startActivity(intent)
         }
 
