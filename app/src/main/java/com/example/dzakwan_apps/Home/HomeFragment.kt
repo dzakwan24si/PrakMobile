@@ -10,19 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.lifecycle.lifecycleScope
 import com.example.dzakwan_apps.AuthActivity
-import com.example.dzakwan_apps.Home.pertemuan_10.TenthActivity
 import com.example.dzakwan_apps.Home.pertemuan_3.ThirdActivity
 import com.example.dzakwan_apps.Home.pertemuan_4.FourthActivity
 import com.example.dzakwan_apps.Home.pertemuan_5.FifthActivity
 import com.example.dzakwan_apps.Home.pertemuan_7.SevenActivity
 import com.example.dzakwan_apps.Home.pertemuan_9.NinthActivity
 import com.example.dzakwan_apps.R
-import com.example.dzakwan_apps.data.Api.CatFactApiClient
 import com.example.dzakwan_apps.databinding.FragmentHomeBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -37,7 +33,6 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loadCatFact()
         val sharedPref = requireContext().getSharedPreferences("user_pref", MODE_PRIVATE)
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
@@ -73,11 +68,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.btnToTen.setOnClickListener {
-            val intent = Intent(requireContext(), TenthActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.btnLogout.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Konfirmasi")
@@ -96,20 +86,6 @@ class HomeFragment : Fragment() {
                     Log.e("Info Dialog","Anda memilih Tidak!")
                 }
                 .show()
-        }
-
-        binding.btnRefresh.setOnClickListener {
-            loadCatFact()
-        }
-    }
-    private fun loadCatFact() {
-        lifecycleScope.launch {
-            try {
-                val response = CatFactApiClient.apiService.getCatFact()
-                binding.tvCatFact.text = "\"${response.fact}\""
-            } catch (e: Exception) {
-                binding.tvCatFact.text = "Gagal mengambil fakta kucing."
-            }
         }
     }
 }

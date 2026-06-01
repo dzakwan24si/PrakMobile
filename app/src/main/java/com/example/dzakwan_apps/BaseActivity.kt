@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.dzakwan_apps.Home.HomeFragment
 import com.example.dzakwan_apps.Message.MessageFragment
 import com.example.dzakwan_apps.More.MoreFragment
+import com.example.dzakwan_apps.Note.FragmentNote
 import com.example.dzakwan_apps.databinding.ActivityBaseBinding
 import com.example.dzakwan_apps.databinding.ActivityMainBinding
 
@@ -41,6 +42,10 @@ class BaseActivity : AppCompatActivity() {
                 }
                 R.id.more -> {
                     replaceFragment(MoreFragment())
+                    true
+                }
+                R.id.note -> {
+                    replaceFragment(FragmentNote())
                     true
                 }
                 else ->false
