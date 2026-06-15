@@ -17,6 +17,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.dzakwan_apps.R
 import com.example.dzakwan_apps.databinding.FragmentTabScanBinding
+import com.example.dzakwan_apps.utils.PermissionHelper
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -39,8 +40,6 @@ class TabScanFragment : Fragment() {
         .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
         .build()
     )
-
-    // Launcher untuk izin modern
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
         if (isGranted) {
             startCamera()
@@ -48,7 +47,6 @@ class TabScanFragment : Fragment() {
             Toast.makeText(context, "Izin kamera diperlukan", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,10 +60,15 @@ class TabScanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        if (hasCameraPermission()) {
-            startCamera()
+        if (!PermissionHelper.hasPermission(
+                requireActivity(),
+                Manifest.permission.CAMERA)) {
+            PermissionHelper.requestPermission(
+                permissionLauncher,
+                Manifest.permission.CAMERA
+            )
         } else {
-            permissionLauncher.launch(Manifest.permission.CAMERA)
+            startCamera()
         }
     }
 
@@ -75,13 +78,6 @@ class TabScanFragment : Fragment() {
         _binding = null
         scanner?.close()
         cameraExecutor.shutdown()
-    }
-
-    private fun hasCameraPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun startCamera() {

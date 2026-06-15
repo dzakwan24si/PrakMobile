@@ -13,6 +13,7 @@ import com.example.dzakwan_apps.data.AppDatabase
 import com.example.dzakwan_apps.data.entity.NoteEntity
 import com.example.dzakwan_apps.databinding.ActivityAuthBinding
 import com.example.dzakwan_apps.databinding.ActivityNoteFormBinding
+import com.example.dzakwan_apps.utils.NotificationHelper
 import kotlinx.coroutines.launch
 private lateinit var db: AppDatabase
 
@@ -57,6 +58,13 @@ class NoteFormActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Isi semua kolom!", Toast.LENGTH_SHORT).show()
             }
+
+            NotificationHelper.showNotification(
+                this, //Jika panggil di fragment maka requireContext()
+                "Catatan Anda",
+                "Catatan anda telah dimasukkan",
+                intent
+            )
         }
     }
 

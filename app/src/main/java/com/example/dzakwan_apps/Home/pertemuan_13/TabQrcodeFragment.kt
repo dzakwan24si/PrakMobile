@@ -1,5 +1,6 @@
 package com.example.dzakwan_apps.Home.pertemuan_13
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.dzakwan_apps.R
 import com.example.dzakwan_apps.databinding.FragmentTabQrcodeBinding
+import com.example.dzakwan_apps.utils.NotificationHelper
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
@@ -30,6 +32,16 @@ class TabQrcodeFragment : Fragment() {
             val text = binding.edtQrInput.text.toString().trim()
             if (text.isEmpty()) return@setOnClickListener
             binding.ivQrCode.setImageBitmap(createQR(text))
+            val intent = Intent(requireContext(), ThirteenthActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+
+            NotificationHelper.showNotification(
+                requireContext(),
+                "QRCode Generate",
+                "QrCode anda telah generate",
+                intent
+            )
         }
     }
 
